@@ -40,6 +40,7 @@ public class MultiplayerDemo extends ApplicationAdapter{
 	private StarShip player;
 	private Texture playerShip;
 	private Texture friendlyShip;
+	private Texture background;
 	private HashMap<String, StarShip> friendlyPlayers;
 
 	private OrthographicCamera gameCam;
@@ -47,7 +48,7 @@ public class MultiplayerDemo extends ApplicationAdapter{
 
 	private Controller controller;
 
-	private Login login;
+
 
 	@Override
 	public void create () {
@@ -56,6 +57,7 @@ public class MultiplayerDemo extends ApplicationAdapter{
 
 		playerShip = new Texture("playerShip2.png");
 		friendlyShip = new Texture("playerShip.png");
+		background = new Texture("bg.jpeg");
 		friendlyPlayers = new HashMap<>();
 		connectSocket();
 		configSocketEvents();
@@ -65,7 +67,7 @@ public class MultiplayerDemo extends ApplicationAdapter{
 
 		controller = new Controller();
 
-		login = new Login(this);
+
 	}
 
 	public void handleInput(float dt){
@@ -112,13 +114,13 @@ public class MultiplayerDemo extends ApplicationAdapter{
 
 	@Override
 	public void render () {
-		Gdx.gl.glClearColor(0.7f, 0.7f, 0.7f, 1);
+		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
-		login.render(Gdx.graphics.getDeltaTime());
 		handleInput(Gdx.graphics.getDeltaTime());
 		updateServer(Gdx.graphics.getDeltaTime());
 
 		batch.begin();
+		batch.draw(background, 0, 0);
 		if (player != null){
 			player.draw(batch);
 		}
@@ -136,12 +138,13 @@ public class MultiplayerDemo extends ApplicationAdapter{
 		batch.dispose();
 		playerShip.dispose();
 		friendlyShip.dispose();
+		background.dispose();
 		controller.dispose();
 	}
 
 	public void connectSocket(){
 		try{
-			socket = IO.socket("http://192.168.0.111:8080");
+			socket = IO.socket("http://192.168.1.3:8080");
 			socket.connect();
 		}catch (Exception e){
 			System.out.println(e);

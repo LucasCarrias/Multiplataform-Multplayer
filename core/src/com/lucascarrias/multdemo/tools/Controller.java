@@ -25,7 +25,6 @@ public class Controller {
         stage = new Stage(viewport, MultiplayerDemo.batch);
 
         stage.addListener(new InputListener(){
-
             @Override
             public boolean keyDown(InputEvent event, int keycode) {
                 switch(keycode){

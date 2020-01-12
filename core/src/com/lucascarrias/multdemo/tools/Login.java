@@ -24,7 +24,7 @@ public class Login implements Input.TextInputListener, Screen {
 
         @Override
         public void input(String text) {
-            serverIp.value = text;
+            value = text;
         }
 
         @Override

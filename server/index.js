@@ -16,11 +16,11 @@ io.on('connection', (socket) => {
         data.id = socket.id;
         socket.broadcast.emit('playerMoved', data);
 
-        // console.log("playerMoved: " + 
-        //             "ID: " + data.id +
-        //             " X: " + data.x +
-        //             " Y: " + data.y +
-        //             " Angle: " + data.angle); 
+        console.log("playerMoved: " + 
+                    "ID: " + data.id +
+                    " X: " + data.x +
+                    " Y: " + data.y +
+                    " Angle: " + data.angle); 
 
         for (var i = 0; i < players.length; i++){
             if(players[i].id == data.id){
