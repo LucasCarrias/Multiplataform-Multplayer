@@ -22,6 +22,7 @@ public class Controller {
     public Controller(){
         cam = new OrthographicCamera();
         viewport = new FitViewport(800, 480, cam);
+
         stage = new Stage(viewport, MultiplayerDemo.batch);
 
         stage.addListener(new InputListener(){

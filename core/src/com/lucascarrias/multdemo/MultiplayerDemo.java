@@ -24,6 +24,8 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 
+import javax.swing.JOptionPane;
+
 import io.socket.client.IO;
 import io.socket.client.Socket;
 import io.socket.emitter.Emitter;
@@ -34,40 +36,41 @@ import sun.rmi.runtime.Log;
 public class MultiplayerDemo extends ApplicationAdapter{
 	private final float UPDATE_TIME = 1/60f;
 	float timer;
+
 	public static SpriteBatch batch;
+
 	private Socket socket;
 	private String id;
+
 	private StarShip player;
+
 	private Texture playerShip;
 	private Texture friendlyShip;
 	private Texture background;
+
 	private HashMap<String, StarShip> friendlyPlayers;
 
 	private OrthographicCamera gameCam;
 	private Viewport gamePort;
-
 	private Controller controller;
-
 
 
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
 
-
 		playerShip = new Texture("playerShip2.png");
 		friendlyShip = new Texture("playerShip.png");
 		background = new Texture("bg.jpeg");
+
 		friendlyPlayers = new HashMap<>();
 		connectSocket();
 		configSocketEvents();
 
 		gameCam = new OrthographicCamera();
-		gamePort = new FitViewport(800,400,gameCam);
+		gamePort = new FitViewport(1024,720,gameCam);
 
 		controller = new Controller();
-
-
 	}
 
 	public void handleInput(float dt){
@@ -116,6 +119,7 @@ public class MultiplayerDemo extends ApplicationAdapter{
 	public void render () {
 		Gdx.gl.glClearColor(0f, 0f, 0f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
 		handleInput(Gdx.graphics.getDeltaTime());
 		updateServer(Gdx.graphics.getDeltaTime());
 
